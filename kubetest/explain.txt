@@ -1,0 +1,32 @@
+so you only need the Service and Deployment kinds (only two resource definitios)
+but for a database component should consist of THREE resource definitios
+PersistentStorage, Service, Deployment
+
+*If a Service does not have a type field, Kubernetes assigns it the default type ClusterIP.
+
+Firstly build your docker image
+
+"docker build -t "title" ."
+
+then push the image to the docker hub, but firstly tag it
+"docker tag <image_name> <username>/<image_name>:1.0.0"
+then login
+"docker login"
+then push it
+"docker push <username>/<image_name>:1.0.0"
+
+the next step you will start your minikube 
+"minikube start"
+after that you should submit your resource definitions to Kubernetes with the following
+"kubectl apply -f <your_path_to_resources>" (the YAML file)
+
+You can watch your Pods coming alive with:
+"kubectl get pods --watch"
+
+As soon as the Pods are in the Running state, your app is ready.
+
+You can access it now through your Service
+"minikube service <your_service_name> --url
+
+You can remove the app from the cluster with 
+"kubectl delete -f <your_path_to_resources>
